@@ -2,12 +2,21 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // モバイルメニュートグル
+  // モバイルメニュートグル（ハンバーガー）
   const menuToggle = document.getElementById('menu-toggle');
   const navMenu = document.getElementById('nav-menu');
-  if (menuToggle) {
+  if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
+      const isOpen = navMenu.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+    // メニュー外タップで閉じる
+    document.addEventListener('click', function(e) {
+      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+      }
     });
   }
 

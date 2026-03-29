@@ -3,7 +3,11 @@
     <div class="logo">
       <a href="/" style="text-decoration: none; color: inherit;">SAP入門ナレッジ</a>
     </div>
-    <button id="menu-toggle" style="display:none;">☰</button>
+    <button id="menu-toggle" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <nav id="nav-menu">
       <ul>
         <li><a href="/" {{ if .IsHome }}class="active"{{ end }}>ホーム</a></li>
