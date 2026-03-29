@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section style="background-color: #f9fafb; padding: 2rem 0;">
+  <div class="container">
+    <h1>ブログ</h1>
+    <p style="color: var(--muted); font-size: 1.1rem;">最新のSAP情報と実務的なナレッジを発信</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <!-- Category Filter -->
+    <div style="margin-bottom: 2rem;">
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="filter-btn btn btn-secondary active" data-filter="all">すべて</button>
+        {{ range .Site.Taxonomies.categories }}
+        <button class="filter-btn btn btn-secondary" data-filter="{{ .Page.Title }}">{{ .Page.Title }}</button>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    <div class="grid grid-2" style="gap: 2rem; margin-bottom: 3rem;">
+      {{ range .Pages }}
+      {{ if not .Draft }}
+      <div class="card blog-post" data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}">
+        {{ with .Params.categories }}
+        <div style="background-color: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 4px; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem;">{{ index . 0 }}</div>
+        {{ end }}
+        <h3 class="card-title">{{ .Title }}</h3>
+        <p class="card-description">{{ .Summary }}</p>
+        <p style="color: var(--muted); font-size: 0.875rem;">{{ .Date.Format "2006年1月2日" }} | 読了時間: {{ div (countwords .Content) 400 | lang.FormatNumber 0 }}分</p>
+        <a href="{{ .RelPermalink }}" style="color: var(--primary); font-weight: 600;">続きを読む →</a>
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

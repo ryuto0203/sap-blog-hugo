@@ -1,0 +1,47 @@
+{{ define "main" }}
+<section style="background-color: #f9fafb; padding: 2rem 0;">
+  <div class="container">
+    {{ with .Params.categories }}
+    <div style="background-color: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem;">{{ index . 0 }}</div>
+    {{ end }}
+    <h1>{{ .Title }}</h1>
+    <p style="color: var(--muted); font-size: 0.9rem;">
+      {{ .Date.Format "2006年1月2日" }}
+      {{ with .Params.tags }}
+      &nbsp;|&nbsp;
+      {{ range . }}<span style="background-color: var(--secondary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.25rem;">{{ . }}</span>{{ end }}
+      {{ end }}
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <!-- Table of Contents -->
+      <div id="table-of-contents" style="background-color: var(--secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">目次</h3>
+      </div>
+
+      <!-- Article Content -->
+      <article>
+        {{ .Content }}
+      </article>
+
+      <!-- Navigation -->
+      <div style="display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}" style="color: var(--primary);">← {{ .Title }}</a>
+        {{ else }}<span></span>{{ end }}
+        {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}" style="color: var(--primary);">{{ .Title }} →</a>
+        {{ end }}
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/blog/" class="btn btn-secondary">← 記事一覧に戻る</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

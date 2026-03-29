@@ -1,0 +1,19 @@
+<header>
+  <div class="header-content container">
+    <div class="logo">
+      <a href="/" style="text-decoration: none; color: inherit;">SAP入門ナレッジ</a>
+    </div>
+    <button id="menu-toggle" style="display:none;">☰</button>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="/" {{ if .IsHome }}class="active"{{ end }}>ホーム</a></li>
+        <li><a href="/what-is-sap/" {{ if eq .RelPermalink "/what-is-sap/" }}class="active"{{ end }}>SAPとは</a></li>
+        <li><a href="/activate/" {{ if eq .RelPermalink "/activate/" }}class="active"{{ end }}>Activate</a></li>
+        <li><a href="/cloud/" {{ if eq .RelPermalink "/cloud/" }}class="active"{{ end }}>S/4HANA Cloud</a></li>
+        <li><a href="/faq/" {{ if eq .RelPermalink "/faq/" }}class="active"{{ end }}>FAQ</a></li>
+        <li><a href="/roadmap/" {{ if eq .RelPermalink "/roadmap/" }}class="active"{{ end }}>学習ロードマップ</a></li>
+        <li><a href="/blog/" {{ if hasPrefix .RelPermalink "/blog" }}class="active"{{ end }}>ブログ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

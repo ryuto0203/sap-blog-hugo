@@ -1,0 +1,16 @@
+baseURL = "https://sap-blog.netlify.app/"
+languageCode = "ja-JP"
+title = "SAP入門ナレッジ"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  description = "SAPを始めとしたERP全般のナレッジを体系的に学べるサイト。初心者から実務者まで、5分で理解できるコンテンツを提供。"
+  googleVerification = "m_FuREQYyJ9wrTDh3qjP37oJNbzIaODGp2v7JFHmBXE"

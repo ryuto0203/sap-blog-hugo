@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  {{ if .Site.Params.googleVerification }}
+  <meta name="google-site-verification" content="{{ .Site.Params.googleVerification }}" />
+  {{ end }}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  {{ if .Keywords }}<meta name="keywords" content="{{ delimit .Keywords ", " }}">{{ end }}
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <title>{{ if .IsHome }}{{ .Site.Title }} - 5分でわかるSAP{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{ partial "header.html" . }}
+  {{ block "main" . }}{{ end }}
+  {{ partial "footer.html" . }}
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

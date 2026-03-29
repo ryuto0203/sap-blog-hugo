@@ -1,0 +1,52 @@
+backend:
+  name: github
+  repo: ryuto0203/sap-blog
+  branch: main
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+locale: ja
+
+collections:
+  - name: "blog"
+    label: "ブログ記事"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "公開日", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "概要", name: "description", widget: "string" }
+      - label: "カテゴリ"
+        name: "categories"
+        widget: "select"
+        multiple: true
+        options:
+          - { label: "導入事例", value: "導入事例" }
+          - { label: "技術解説", value: "技術解説" }
+          - { label: "学習ガイド", value: "学習ガイド" }
+          - { label: "ニュース", value: "ニュース" }
+      - label: "タグ"
+        name: "tags"
+        widget: "list"
+        required: false
+      - { label: "下書き", name: "draft", widget: "boolean", default: true }
+      - { label: "本文", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "固定ページ"
+    files:
+      - label: "SAPとは"
+        name: "what-is-sap"
+        file: "content/what-is-sap.md"
+        fields:
+          - { label: "タイトル", name: "title", widget: "string" }
+          - { label: "概要", name: "description", widget: "string" }
+          - { label: "本文", name: "body", widget: "markdown" }
+      - label: "プライバシーポリシー"
+        name: "privacy"
+        file: "content/privacy.md"
+        fields:
+          - { label: "タイトル", name: "title", widget: "string" }
+          - { label: "本文", name: "body", widget: "markdown" }
