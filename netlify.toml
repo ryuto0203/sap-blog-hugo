@@ -5,6 +5,14 @@
 [build.environment]
   HUGO_VERSION = "0.159.1"
 
+# mainブランチのみ本番デプロイ
+[context.production]
+  command = "hugo --minify"
+
+# developブランチはデプロイしない（プレビューのみ）
+[context.branch-deploy]
+  command = "hugo --minify --buildDrafts"
+
 [[redirects]]
   from = "/admin"
   to = "/admin/"
