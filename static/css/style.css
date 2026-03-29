@@ -488,6 +488,51 @@ footer {
    ======================================== */
 .blog-post { cursor: pointer; }
 
+/* Blog Scroll Carousel */
+.blog-scroll-wrapper {
+  padding: 0.5rem 0 1.5rem;
+  overflow: hidden;
+}
+
+.blog-scroll-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .blog-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    padding: 0.5rem 0 1.5rem;
+  }
+
+  .blog-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .blog-scroll-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    width: max-content;
+  }
+
+  .blog-scroll-card {
+    width: 78vw;
+    max-width: 320px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}
+
 .filter-btn {
   font-size: 0.85rem;
   padding: 0.45rem 1rem;
