@@ -1,4 +1,4 @@
-baseURL = "https://sap-blog.netlify.app/"
+baseURL = "https://sapblog.netlify.app/"
 languageCode = "ja-JP"
 title = "SAP入門ナレッジ"
 
