@@ -1,0 +1,61 @@
+<aside class="sidebar">
+
+  <!-- 検索ウィジェット -->
+  <div class="sidebar-widget">
+    <h3 class="sidebar-widget-title">記事を検索</h3>
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <input type="text" id="search-input" class="search-input" placeholder="キーワードを入力..." autocomplete="off" />
+        <span class="search-icon">🔍</span>
+      </div>
+      <div id="search-results" class="search-results" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- タグ・カテゴリフィルター -->
+  <div class="sidebar-widget">
+    <h3 class="sidebar-widget-title">絞り込む</h3>
+    <div class="filter-select-wrap">
+      <select id="blog-filter-select" class="filter-select">
+        <option value="all">すべての記事</option>
+        <optgroup label="モジュール別">
+          <option value="MM">📦 MM（在庫管理）</option>
+          <option value="SD">📈 SD（販売流通）</option>
+          <option value="PP">⚙️ PP（生産計画）</option>
+          <option value="FI">💰 FI（財務会計）</option>
+        </optgroup>
+        <optgroup label="カテゴリ別">
+          <option value="学習ガイド">📚 学習ガイド</option>
+          <option value="導入事例">🏢 導入事例</option>
+          <option value="技術解説">🔧 技術解説</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <!-- カテゴリ一覧 -->
+  <div class="sidebar-widget">
+    <h3 class="sidebar-widget-title">カテゴリ</h3>
+    <ul class="sidebar-category-list">
+      {{ range .Site.Taxonomies.categories }}
+      <li>
+        <a href="{{ .Page.RelPermalink }}" class="sidebar-category-link">
+          {{ .Page.Title }}
+          <span class="sidebar-category-count">{{ .Count }}</span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <!-- タグクラウド -->
+  <div class="sidebar-widget">
+    <h3 class="sidebar-widget-title">タグ</h3>
+    <div class="tag-cloud">
+      {{ range .Site.Taxonomies.tags }}
+      <a href="{{ .Page.RelPermalink }}" class="tag-cloud-item">{{ .Page.Title }}</a>
+      {{ end }}
+    </div>
+  </div>
+
+</aside>

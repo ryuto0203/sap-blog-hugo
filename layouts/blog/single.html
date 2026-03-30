@@ -1,15 +1,15 @@
 {{ define "main" }}
-<section style="background-color: #f9fafb; padding: 2rem 0;">
+<section class="page-hero">
   <div class="container">
     {{ with .Params.categories }}
-    <div style="background-color: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem;">{{ index . 0 }}</div>
+    <span class="category-badge category-badge-{{ index . 0 | urlize }}" style="display:inline-block; margin-bottom: 0.75rem;">{{ index . 0 }}</span>
     {{ end }}
     <h1>{{ .Title }}</h1>
-    <p style="color: var(--muted); font-size: 0.9rem;">
+    <p class="page-hero-desc">
       {{ .Date.Format "2006年1月2日" }}
       {{ with .Params.tags }}
-      &nbsp;|&nbsp;
-      {{ range . }}<span style="background-color: var(--secondary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.25rem;">{{ . }}</span>{{ end }}
+      &nbsp;·&nbsp;
+      {{ range . }}<a href="/tags/{{ . | urlize }}/" class="blog-tag">{{ . }}</a>{{ end }}
       {{ end }}
     </p>
   </div>
@@ -17,30 +17,37 @@
 
 <section>
   <div class="container">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <!-- Table of Contents -->
-      <div id="table-of-contents" style="background-color: var(--secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-        <h3 style="margin-bottom: 1rem;">目次</h3>
-      </div>
+    <div class="blog-layout blog-layout-single">
 
-      <!-- Article Content -->
-      <article>
-        {{ .Content }}
-      </article>
+      <!-- 記事本文 -->
+      <main class="blog-main">
+        <!-- Table of Contents -->
+        <div id="table-of-contents" class="toc-box">
+          <h3 class="toc-title">目次</h3>
+        </div>
 
-      <!-- Navigation -->
-      <div style="display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-        {{ with .PrevInSection }}
-        <a href="{{ .RelPermalink }}" style="color: var(--primary);">← {{ .Title }}</a>
-        {{ else }}<span></span>{{ end }}
-        {{ with .NextInSection }}
-        <a href="{{ .RelPermalink }}" style="color: var(--primary);">{{ .Title }} →</a>
-        {{ end }}
-      </div>
+        <article>
+          {{ .Content }}
+        </article>
 
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="/blog/" class="btn btn-secondary">← 記事一覧に戻る</a>
-      </div>
+        <!-- 記事ナビゲーション -->
+        <div class="post-nav">
+          {{ with .PrevInSection }}
+          <a href="{{ .RelPermalink }}" class="post-nav-link post-nav-prev">← {{ .Title }}</a>
+          {{ else }}<span></span>{{ end }}
+          {{ with .NextInSection }}
+          <a href="{{ .RelPermalink }}" class="post-nav-link post-nav-next">{{ .Title }} →</a>
+          {{ end }}
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="/blog/" class="btn btn-secondary">← 記事一覧に戻る</a>
+        </div>
+      </main>
+
+      <!-- サイドバー -->
+      {{ partial "sidebar.html" . }}
+
     </div>
   </div>
 </section>

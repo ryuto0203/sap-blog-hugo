@@ -31,26 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ブログカテゴリフィルター
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const blogPosts = document.querySelectorAll('.blog-post');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const filter = this.getAttribute('data-filter');
-      filterBtns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-
-      blogPosts.forEach(post => {
-        if (filter === 'all' || post.getAttribute('data-category') === filter) {
-          post.style.display = 'block';
-        } else {
-          post.style.display = 'none';
-        }
-      });
-    });
-  });
-
   // 目次の自動生成
   const toc = document.getElementById('table-of-contents');
   if (toc) {
@@ -86,5 +66,145 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     pre.parentElement.insertBefore(btn, pre);
   });
+
+  // ========================================
+  // Fuse.js 検索
+  // ========================================
+  let fuseInstance = null;
+
+  async function initSearch() {
+    try {
+      const resp = await fetch('/index.json');
+      if (!resp.ok) return;
+      const data = await resp.json();
+      fuseInstance = new Fuse(data, {
+        keys: [
+          { name: 'title', weight: 0.5 },
+          { name: 'summary', weight: 0.3 },
+          { name: 'tags', weight: 0.15 },
+          { name: 'categories', weight: 0.05 }
+        ],
+        threshold: 0.4,
+        includeScore: true,
+        minMatchCharLength: 2,
+      });
+    } catch (e) {
+      console.warn('Search index load failed:', e);
+    }
+  }
+
+  function renderSearchResults(results, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    if (!results || results.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+    container.innerHTML = results.slice(0, 5).map(r => `
+      <a href="${r.item.url}" class="search-result-item">
+        <div class="search-result-title">${r.item.title}</div>
+        <div class="search-result-date">${r.item.date || ''}</div>
+      </a>
+    `).join('');
+  }
+
+  function bindSearchInput(inputId, resultsId) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    let timer;
+    input.addEventListener('input', function () {
+      clearTimeout(timer);
+      const q = this.value.trim();
+      if (!q || !fuseInstance) {
+        document.getElementById(resultsId).innerHTML = '';
+        return;
+      }
+      timer = setTimeout(() => {
+        const results = fuseInstance.search(q);
+        renderSearchResults(results, resultsId);
+      }, 200);
+    });
+    // 外側クリックで結果を閉じる
+    document.addEventListener('click', function (e) {
+      if (!input.contains(e.target)) {
+        document.getElementById(resultsId).innerHTML = '';
+      }
+    });
+  }
+
+  initSearch().then(() => {
+    bindSearchInput('search-input', 'search-results');
+    bindSearchInput('mobile-search-input', 'mobile-search-results');
+  });
+
+  // ========================================
+  // ブログフィルター（ドロップダウン + URLハッシュ）
+  // ========================================
+  function filterBlogPosts(value) {
+    const posts = document.querySelectorAll('.blog-post');
+    const filterBar = document.getElementById('active-filter-bar');
+    const filterLabel = document.getElementById('active-filter-label');
+    let visibleCount = 0;
+
+    posts.forEach(post => {
+      const category = post.getAttribute('data-category') || '';
+      const tags = (post.getAttribute('data-tags') || '').split(',').map(t => t.trim());
+      const matches = value === 'all'
+        || category === value
+        || tags.some(t => t.toLowerCase() === value.toLowerCase());
+
+      post.style.display = matches ? 'block' : 'none';
+      if (matches) visibleCount++;
+    });
+
+    const noResults = document.getElementById('no-results');
+    if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+    if (filterBar) {
+      filterBar.style.display = value === 'all' ? 'none' : 'flex';
+      if (filterLabel) filterLabel.textContent = `「${value}」の記事を表示中`;
+    }
+  }
+
+  function syncFilterSelects(value) {
+    ['blog-filter-select', 'mobile-blog-filter-select'].forEach(id => {
+      const sel = document.getElementById(id);
+      if (sel) sel.value = value;
+    });
+  }
+
+  function applyHashFilter() {
+    const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+    if (hash) {
+      syncFilterSelects(hash);
+      filterBlogPosts(hash);
+    }
+  }
+
+  // 両方のセレクトにイベントを登録
+  ['blog-filter-select', 'mobile-blog-filter-select'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    sel.addEventListener('change', function () {
+      const value = this.value;
+      syncFilterSelects(value);
+      filterBlogPosts(value);
+      history.replaceState(null, '', value === 'all' ? location.pathname : '#' + value);
+    });
+  });
+
+  // クリアボタン
+  const clearBtn = document.getElementById('clear-filter');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      syncFilterSelects('all');
+      filterBlogPosts('all');
+      history.replaceState(null, '', location.pathname);
+    });
+  }
+
+  // ページ読み込み時にハッシュを適用
+  if (window.location.hash) applyHashFilter();
+  window.addEventListener('hashchange', applyHashFilter);
 
 });

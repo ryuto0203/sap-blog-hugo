@@ -1,38 +1,63 @@
 {{ define "main" }}
-<section style="background-color: #f9fafb; padding: 2rem 0;">
+<section class="page-hero">
   <div class="container">
     <h1>ブログ</h1>
-    <p style="color: var(--muted); font-size: 1.1rem;">最新のSAP情報と実務的なナレッジを発信</p>
+    <p class="page-hero-desc">最新のSAP情報と実務的なナレッジを発信</p>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <!-- Category Filter -->
-    <div style="margin-bottom: 2rem;">
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <button class="filter-btn btn btn-secondary active" data-filter="all">すべて</button>
-        {{ range .Site.Taxonomies.categories }}
-        <button class="filter-btn btn btn-secondary" data-filter="{{ .Page.Title }}">{{ .Page.Title }}</button>
-        {{ end }}
-      </div>
-    </div>
+    <div class="blog-layout">
 
-    <!-- Blog Posts Grid -->
-    <div class="grid grid-2" style="gap: 2rem; margin-bottom: 3rem;">
-      {{ range .Pages }}
-      {{ if not .Draft }}
-      <div class="card blog-post" data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}">
-        {{ with .Params.categories }}
-        <div style="background-color: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 4px; display: inline-block; margin-bottom: 1rem; font-size: 0.875rem;">{{ index . 0 }}</div>
-        {{ end }}
-        <h3 class="card-title">{{ .Title }}</h3>
-        <p class="card-description">{{ .Summary }}</p>
-        <p style="color: var(--muted); font-size: 0.875rem;">{{ .Date.Format "2006年1月2日" }} | 読了時間: {{ div (countwords .Content) 400 | lang.FormatNumber 0 }}分</p>
-        <a href="{{ .RelPermalink }}" style="color: var(--primary); font-weight: 600;">続きを読む →</a>
-      </div>
-      {{ end }}
-      {{ end }}
+      <!-- メインコンテンツ -->
+      <main class="blog-main">
+        <!-- アクティブフィルター表示 -->
+        <div id="active-filter-bar" class="active-filter-bar" style="display:none;">
+          <span id="active-filter-label"></span>
+          <button id="clear-filter" class="clear-filter-btn">✕ クリア</button>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div class="grid grid-1 blog-posts-grid" id="blog-posts-container" style="gap: 1.5rem; margin-bottom: 3rem;">
+          {{ range .Pages }}
+          {{ if not .Draft }}
+          <div class="card blog-post"
+            data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}"
+            data-tags="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}">
+            <div class="blog-card-inner">
+              <div class="blog-card-meta">
+                {{ with .Params.categories }}
+                <span class="category-badge category-badge-{{ index . 0 | urlize }}">{{ index . 0 }}</span>
+                {{ end }}
+                <span class="blog-card-date">{{ .Date.Format "2006年1月2日" }}</span>
+              </div>
+              <h3 class="card-title blog-card-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              </h3>
+              <p class="card-description">{{ .Summary }}</p>
+              <div class="blog-card-footer">
+                {{ with .Params.tags }}
+                <div class="blog-card-tags">
+                  {{ range . }}<span class="blog-tag">{{ . }}</span>{{ end }}
+                </div>
+                {{ end }}
+                <a href="{{ .RelPermalink }}" class="read-more-link">続きを読む →</a>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+          {{ end }}
+        </div>
+
+        <div id="no-results" class="no-results-message" style="display:none;">
+          <p>該当する記事が見つかりませんでした。</p>
+        </div>
+      </main>
+
+      <!-- サイドバー -->
+      {{ partial "sidebar.html" . }}
+
     </div>
   </div>
 </section>

@@ -777,12 +777,442 @@ article blockquote {
 }
 
 /* ========================================
+   Blog 2-Column Layout
+   ======================================== */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.blog-main {
+  min-width: 0;
+}
+
+/* ========================================
+   Sidebar
+   ======================================== */
+.sidebar {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sidebar-widget {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow);
+}
+
+.sidebar-widget-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.sidebar-category-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sidebar-category-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  font-size: 0.9rem;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.sidebar-category-link:hover {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+.sidebar-category-count {
+  font-size: 0.75rem;
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 0.1rem 0.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+/* ========================================
+   Tag Cloud
+   ======================================== */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag-cloud-item {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--secondary);
+  color: var(--primary);
+  border-radius: 100px;
+  border: 1px solid rgba(0,102,204,0.15);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.tag-cloud-item:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ========================================
+   Search Box
+   ======================================== */
+.search-input-wrap {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.65rem 2.5rem 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  color: var(--foreground);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.search-results {
+  margin-top: 0.5rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.search-result-item {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  text-decoration: none;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-top: none;
+  transition: background var(--transition);
+}
+
+.search-result-item:first-child {
+  border-top: 1px solid var(--border);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.search-result-item:last-child {
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.search-result-item:hover {
+  background: var(--secondary);
+}
+
+.search-result-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.15rem;
+}
+
+.search-result-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.search-no-results {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* ========================================
+   Filter Select (Dropdown)
+   ======================================== */
+.filter-select-wrap {
+  position: relative;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.65rem 2rem 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--foreground);
+  background: var(--background);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: border-color var(--transition);
+}
+
+.filter-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+}
+
+.filter-select optgroup {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.filter-select option {
+  font-weight: 400;
+  color: var(--foreground);
+  padding: 0.25rem;
+}
+
+/* ========================================
+   Active Filter Bar
+   ======================================== */
+.active-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: var(--secondary);
+  border: 1px solid rgba(0,102,204,0.2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.clear-filter-btn {
+  margin-left: auto;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  background: none;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-sm);
+  color: var(--primary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.clear-filter-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ========================================
+   Blog Card Styles (Updated)
+   ======================================== */
+.blog-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.blog-card-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.blog-card-title a {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.blog-card-title a:hover {
+  color: var(--primary);
+}
+
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.blog-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.blog-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--secondary);
+  color: var(--primary);
+  border-radius: 100px;
+  text-decoration: none;
+  border: 1px solid rgba(0,102,204,0.15);
+  transition: all var(--transition);
+}
+
+.blog-tag:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.read-more-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+.read-more-link:hover {
+  color: var(--primary-dark);
+}
+
+/* ========================================
+   Category Badges (Color-coded)
+   ======================================== */
+.category-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary);
+}
+
+.category-badge-学習ガイド { background: #0066cc; }
+.category-badge-導入事例 { background: #059669; }
+.category-badge-技術解説 { background: #7c3aed; }
+
+/* ========================================
+   No Results
+   ======================================== */
+.no-results-message {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted);
+}
+
+/* ========================================
+   ToC Box (in blog single sidebar area)
+   ======================================== */
+.toc-box {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.toc-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.75rem;
+}
+
+/* ========================================
+   Post Navigation
+   ======================================== */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.post-nav-link {
+  color: var(--primary);
+  font-size: 0.9rem;
+  max-width: 45%;
+  transition: color var(--transition);
+}
+
+.post-nav-link:hover { color: var(--primary-dark); }
+.post-nav-next { text-align: right; margin-left: auto; }
+
+/* ========================================
+   Mobile Search Area (in hamburger menu)
+   ======================================== */
+.mobile-search-area {
+  display: none;
+  padding: 1rem;
+  border-top: 1px solid var(--border-light);
+  margin-top: 0.5rem;
+}
+
+/* ========================================
+   Grid 1 Column
+   ======================================== */
+.grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* ========================================
    Responsive
    ======================================== */
 @media (max-width: 1024px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .footer-content { grid-template-columns: 1fr 1fr; }
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -829,6 +1259,10 @@ article blockquote {
 
   article table { font-size: 0.8rem; }
   article th, article td { padding: 0.5rem 0.75rem; }
+
+  .mobile-search-area {
+    display: block;
+  }
 }
 
 @media (max-width: 480px) {

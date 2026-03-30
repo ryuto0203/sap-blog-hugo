@@ -2,6 +2,9 @@ baseURL = "https://sapblog.netlify.app/"
 languageCode = "ja-JP"
 title = "SAP入門ナレッジ"
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
