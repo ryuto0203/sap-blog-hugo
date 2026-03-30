@@ -3,7 +3,7 @@ title: "大手製造業がS/4HANA Cloudで業務効率化を実現"
 date: 2026-01-20
 description: "従業員5,000名の大手製造業が、S/4HANA Cloudの導入により業務効率を30%改善した事例を紹介します。"
 categories: ["導入事例"]
-tags: ["S/4HANA Cloud", "製造業", "業務効率化"]
+tags: ["S/4HANA Cloud", "製造業", "業務効率化", "FI", "SD"]
 draft: false
 ---
 

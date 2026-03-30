@@ -3,7 +3,7 @@ title: "SAPのデータ移行ベストプラクティス"
 date: 2026-01-15
 description: "レガシーシステムからSAPへのデータ移行で失敗しないための重要ポイントを解説します。"
 categories: ["技術解説"]
-tags: ["データ移行", "LSMW", "BAPI", "プロジェクト管理"]
+tags: ["データ移行", "LSMW", "BAPI", "プロジェクト管理", "MM"]
 draft: false
 ---
 

@@ -718,6 +718,65 @@ article blockquote {
 }
 
 /* ========================================
+   Module Card Links
+   ======================================== */
+.module-card-link {
+  text-decoration: none;
+  display: block;
+}
+
+.module-card-link .card-title {
+  transition: color var(--transition);
+}
+
+.module-card-link:hover .card {
+  border-color: var(--primary);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-3px);
+}
+
+.module-card-link:hover .card-title {
+  color: var(--primary);
+}
+
+.module-card-arrow {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.module-card-link:hover .module-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================================
+   Page Hero (non-home pages)
+   ======================================== */
+.page-hero {
+  background-color: #f9fafb;
+  padding: 2.5rem 0;
+}
+
+.page-hero-desc {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Content wrapper */
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ========================================
    Responsive
    ======================================== */
 @media (max-width: 1024px) {
