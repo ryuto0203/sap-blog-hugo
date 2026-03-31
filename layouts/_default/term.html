@@ -21,13 +21,37 @@
             </div>
             <div id="mobile-search-results" class="search-results" aria-live="polite"></div>
           </div>
+          <div class="filter-select-wrap" style="margin-top: 0.75rem;">
+            <select id="mobile-blog-filter-select" class="filter-select">
+              <option value="all">すべての記事</option>
+              <optgroup label="モジュール別">
+                <option value="MM">📦 MM（在庫管理）</option>
+                <option value="SD">📈 SD（販売流通）</option>
+                <option value="PP">⚙️ PP（生産計画）</option>
+                <option value="FI">💰 FI（財務会計）</option>
+              </optgroup>
+              <optgroup label="カテゴリ別">
+                <option value="学習ガイド">📚 学習ガイド</option>
+                <option value="導入事例">🏢 導入事例</option>
+                <option value="技術解説">🔧 技術解説</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <!-- アクティブフィルター表示（現在のタグで絞り込み中） -->
+        <div class="active-filter-bar" style="display:flex;">
+          <span>「{{ .Title }}」で絞り込み中</span>
+          <a href="/blog/" class="clear-filter-btn">✕ クリア</a>
         </div>
 
         <!-- 記事一覧 -->
-        <div class="post-list">
+        <div class="post-list" id="blog-posts-container">
           {{ range .Pages }}
           {{ if not .Draft }}
-          <article class="post-list-item">
+          <article class="post-list-item blog-post"
+            data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}"
+            data-tags="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}">
             <div class="post-list-meta">
               {{ with .Params.categories }}
               <span class="category-badge category-badge-{{ index . 0 | urlize }}">{{ index . 0 }}</span>
@@ -51,6 +75,10 @@
           </article>
           {{ end }}
           {{ end }}
+        </div>
+
+        <div id="no-results" class="no-results-message" style="display:none;">
+          <p>該当する記事が見つかりませんでした。</p>
         </div>
       </main>
 
