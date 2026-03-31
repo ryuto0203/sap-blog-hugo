@@ -25,9 +25,9 @@
           <option value="FI">💰 FI（財務会計）</option>
         </optgroup>
         <optgroup label="カテゴリ別">
-          <option value="学習ガイド">📚 学習ガイド</option>
-          <option value="導入事例">🏢 導入事例</option>
-          <option value="技術解説">🔧 技術解説</option>
+          {{ range .Site.Taxonomies.categories }}
+          <option value="{{ .Page.Title }}">{{ .Page.Title }}</option>
+          {{ end }}
         </optgroup>
       </select>
     </div>

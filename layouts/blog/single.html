@@ -6,7 +6,10 @@
     {{ end }}
     <h1>{{ .Title }}</h1>
     <p class="page-hero-desc">
-      {{ .Date.Format "2006年1月2日" }}
+      <span>投稿: {{ .Date.Format "2006年1月2日" }}</span>
+      {{ if .Params.lastmod }}
+      <span>&nbsp;·&nbsp;更新: {{ .Lastmod.Format "2006年1月2日" }}</span>
+      {{ end }}
       {{ with .Params.tags }}
       &nbsp;·&nbsp;
       {{ range . }}<a href="/tags/{{ . | urlize }}/" class="blog-tag">{{ . }}</a>{{ end }}
