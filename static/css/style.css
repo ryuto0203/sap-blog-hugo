@@ -31,6 +31,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-width: 0;
 }
 
 html {
@@ -127,6 +128,7 @@ nav ul {
   align-items: center;
   gap: 0.25rem;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 nav ul li a {
@@ -1201,6 +1203,114 @@ article blockquote {
 }
 
 /* ========================================
+   Post List (Qiita style)
+   ======================================== */
+.post-list {
+  border-top: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.post-list-item {
+  padding: 1.25rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  transition: background var(--transition);
+}
+
+.post-list-item:hover {
+  background: var(--border-light);
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
+.post-list-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.post-list-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.post-list-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.post-list-title a {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.post-list-title a:hover {
+  color: var(--primary);
+}
+
+.post-list-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.post-list-author {
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.post-list-date {
+  color: var(--muted-light);
+}
+
+/* ========================================
+   Responsive Overflow Fixes
+   ======================================== */
+
+/* テキストオーバーフロー防止 */
+article,
+.card,
+.post-list-item,
+.sidebar-widget {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* 画像・動画の最大幅制限 */
+article img,
+article video,
+article iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* テーブルのスクロール（article外も含む） */
+.content-wrapper table,
+.card table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* ========================================
    Responsive
    ======================================== */
 @media (max-width: 1024px) {
@@ -1263,10 +1373,81 @@ article blockquote {
   .mobile-search-area {
     display: block;
   }
+
+  /* フィルターバーのwrap */
+  .active-filter-bar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* ポストナビゲーション縦並び */
+  .post-nav {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .post-nav-link {
+    max-width: 100%;
+  }
+
+  /* ヒーローセクションのpadding調整 */
+  .page-hero {
+    padding: 1.75rem 0;
+  }
+
+  /* サイドバーのタグクラウド折り返し */
+  .tag-cloud {
+    gap: 0.3rem;
+  }
+
+  /* ブログカードフッターの縦並び */
+  .blog-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* ポストリストのpaddingを縮小 */
+  .post-list-item {
+    padding: 1rem 0.25rem;
+  }
+
+  /* 検索結果のz-index確保 */
+  .search-results {
+    position: relative;
+    z-index: 10;
+  }
 }
 
 @media (max-width: 480px) {
   .container { padding: 0 1rem; }
   .card { padding: 1.25rem; }
   .btn-large { width: 100%; }
+
+  /* セクションのpadding縮小 */
+  section { padding: 2.5rem 0; }
+
+  /* ヒーローのpadding縮小 */
+  .hero { padding: 2.5rem 0 2rem; }
+
+  /* フッターグリッドの調整 */
+  .footer-content { padding: 0 1rem 2rem; }
+
+  /* ポストリストfootの縦並び */
+  .post-list-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  /* ブログタグのサイズ縮小 */
+  .blog-tag {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.45rem;
+  }
+
+  /* カテゴリバッジのサイズ縮小 */
+  .category-badge {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.5rem;
+  }
 }

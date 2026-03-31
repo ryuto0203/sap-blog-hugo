@@ -18,34 +18,34 @@
           <button id="clear-filter" class="clear-filter-btn">✕ クリア</button>
         </div>
 
-        <!-- Blog Posts Grid -->
-        <div class="grid grid-1 blog-posts-grid" id="blog-posts-container" style="gap: 1.5rem; margin-bottom: 3rem;">
+        <!-- Blog Posts List -->
+        <div class="post-list" id="blog-posts-container">
           {{ range .Pages }}
           {{ if not .Draft }}
-          <div class="card blog-post"
+          <article class="post-list-item blog-post"
             data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}"
             data-tags="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}">
-            <div class="blog-card-inner">
-              <div class="blog-card-meta">
-                {{ with .Params.categories }}
-                <span class="category-badge category-badge-{{ index . 0 | urlize }}">{{ index . 0 }}</span>
-                {{ end }}
-                <span class="blog-card-date">{{ .Date.Format "2006年1月2日" }}</span>
+            <div class="post-list-meta">
+              {{ with .Params.categories }}
+              <span class="category-badge category-badge-{{ index . 0 | urlize }}">{{ index . 0 }}</span>
+              {{ end }}
+              {{ with .Params.tags }}
+              <div class="post-list-tags">
+                {{ range . }}<span class="blog-tag">{{ . }}</span>{{ end }}
               </div>
-              <h3 class="card-title blog-card-title">
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              </h3>
-              <p class="card-description">{{ .Summary }}</p>
-              <div class="blog-card-footer">
-                {{ with .Params.tags }}
-                <div class="blog-card-tags">
-                  {{ range . }}<span class="blog-tag">{{ . }}</span>{{ end }}
-                </div>
-                {{ end }}
-                <a href="{{ .RelPermalink }}" class="read-more-link">続きを読む →</a>
-              </div>
+              {{ end }}
             </div>
-          </div>
+            <h3 class="post-list-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h3>
+            <div class="post-list-foot">
+              {{ with .Params.author }}<span class="post-list-author">{{ . }}</span>{{ end }}
+              <span class="post-list-date">投稿: {{ .Date.Format "2006年1月2日" }}</span>
+              {{ if and .Lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+              <span class="post-list-date">更新: {{ .Lastmod.Format "2006年1月2日" }}</span>
+              {{ end }}
+            </div>
+          </article>
           {{ end }}
           {{ end }}
         </div>

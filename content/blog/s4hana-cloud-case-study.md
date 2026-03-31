@@ -5,6 +5,8 @@ description: "従業員5,000名の大手製造業が、S/4HANA Cloudの導入に
 categories: ["導入事例"]
 tags: ["S/4HANA Cloud", "製造業", "業務効率化", "FI", "SD"]
 draft: false
+author: "SAP入門ナレッジ 編集部"
+lastmod: 2026-01-20
 ---
 
 ## 概要
