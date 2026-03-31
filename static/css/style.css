@@ -1311,6 +1311,133 @@ article iframe {
 }
 
 /* ========================================
+   Post List Item — Full Card Clickable
+   ======================================== */
+.post-list-item {
+  position: relative;
+}
+
+.post-list-title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.post-list-tags .blog-tag,
+.post-list-foot a {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   Homepage Layout (Content + Sidebar)
+   ======================================== */
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.home-main {
+  min-width: 0;
+}
+
+.home-sidebar {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* 最新記事リスト */
+.recent-posts-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.recent-post-item {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.recent-post-item:last-child {
+  border-bottom: none;
+}
+
+.recent-post-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.65rem 0.25rem;
+  text-decoration: none;
+  transition: background var(--transition);
+  border-radius: var(--radius-sm);
+}
+
+.recent-post-link:hover {
+  background: var(--secondary);
+  padding-left: 0.5rem;
+}
+
+.recent-post-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  transition: color var(--transition);
+}
+
+.recent-post-link:hover .recent-post-title {
+  color: var(--primary);
+}
+
+.recent-post-date {
+  font-size: 0.75rem;
+  color: var(--muted-light);
+}
+
+.sidebar-more-link {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  text-align: right;
+  transition: color var(--transition);
+}
+
+.sidebar-more-link:hover {
+  color: var(--primary-dark);
+}
+
+/* 広告プレースホルダー */
+.sidebar-ad-placeholder {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-placeholder {
+  width: 100%;
+  min-height: 100px;
+  background: var(--border-light);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-light);
+  font-size: 0.8rem;
+}
+
+/* ========================================
    Responsive
    ======================================== */
 @media (max-width: 1024px) {
@@ -1322,6 +1449,12 @@ article iframe {
   }
   .sidebar {
     display: none;
+  }
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+  .home-sidebar {
+    position: static;
   }
 }
 
@@ -1415,6 +1548,10 @@ article iframe {
   .search-results {
     position: relative;
     z-index: 10;
+  }
+
+  .home-sidebar {
+    display: none;
   }
 }
 
