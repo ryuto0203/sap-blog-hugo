@@ -1185,13 +1185,15 @@ article blockquote {
 .post-nav-next { text-align: right; margin-left: auto; }
 
 /* ========================================
-   Mobile Search Area (in hamburger menu)
+   Blog Inline Search（サイドバー非表示時に記事一覧上部へ）
    ======================================== */
-.mobile-search-area {
+.blog-inline-search {
   display: none;
   padding: 1rem;
-  border-top: 1px solid var(--border-light);
-  margin-top: 0.5rem;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1.25rem;
 }
 
 /* ========================================
@@ -1450,6 +1452,9 @@ article iframe {
   .sidebar {
     display: none;
   }
+  .blog-inline-search {
+    display: block;
+  }
   .home-layout {
     grid-template-columns: 1fr;
   }
@@ -1503,9 +1508,6 @@ article iframe {
   article table { font-size: 0.8rem; }
   article th, article td { padding: 0.5rem 0.75rem; }
 
-  .mobile-search-area {
-    display: block;
-  }
 
   /* フィルターバーのwrap */
   .active-filter-bar {

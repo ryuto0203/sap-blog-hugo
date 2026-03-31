@@ -1,5 +1,5 @@
 [build]
-  command = "hugo --minify"
+  command = "hugo --minify --buildFuture"
   publish = "public"
 
 [build.environment]
@@ -7,11 +7,11 @@
 
 # mainブランチのみ本番デプロイ
 [context.production]
-  command = "hugo --minify"
+  command = "hugo --minify --buildFuture"
 
 # developブランチはデプロイしない（プレビューのみ）
 [context.branch-deploy]
-  command = "hugo --minify --buildDrafts"
+  command = "hugo --minify --buildDrafts --buildFuture"
 
 [[redirects]]
   from = "/admin"

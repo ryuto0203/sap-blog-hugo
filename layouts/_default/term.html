@@ -1,22 +1,30 @@
 {{ define "main" }}
-<section style="background-color: #f9fafb; padding: 2rem 0;">
+<section class="page-hero">
   <div class="container">
     <h1>{{ .Title }}</h1>
-    <p style="color: var(--muted);">このカテゴリの記事一覧</p>
+    <p class="page-hero-desc">「{{ .Title }}」の記事一覧</p>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <div class="grid grid-2" style="gap: 2rem;">
+    <div class="post-list">
       {{ range .Pages }}
       {{ if not .Draft }}
-      <div class="card blog-post">
-        <h3 class="card-title">{{ .Title }}</h3>
-        <p class="card-description">{{ .Summary }}</p>
-        <p style="color: var(--muted); font-size: 0.875rem;">{{ .Date.Format "2006年1月2日" }}</p>
-        <a href="{{ .RelPermalink }}" style="color: var(--primary); font-weight: 600;">続きを読む →</a>
-      </div>
+      <article class="post-list-item">
+        <div class="post-list-meta">
+          {{ with .Params.categories }}
+          <span class="category-badge category-badge-{{ index . 0 | urlize }}">{{ index . 0 }}</span>
+          {{ end }}
+        </div>
+        <h3 class="post-list-title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        <div class="post-list-foot">
+          {{ with .Params.author }}<span class="post-list-author">{{ . }}</span>{{ end }}
+          <span class="post-list-date">投稿: {{ .Date.Format "2006年1月2日" }}</span>
+        </div>
+      </article>
       {{ end }}
       {{ end }}
     </div>

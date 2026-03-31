@@ -12,6 +12,33 @@
 
       <!-- メインコンテンツ -->
       <main class="blog-main">
+        <!-- サイドバー非表示時の検索・フィルター（≤1024px） -->
+        <div class="blog-inline-search">
+          <div class="search-box" style="margin-bottom: 0.75rem;">
+            <div class="search-input-wrap">
+              <input type="text" id="mobile-search-input" class="search-input" placeholder="記事を検索..." autocomplete="off" />
+              <span class="search-icon">🔍</span>
+            </div>
+            <div id="mobile-search-results" class="search-results" aria-live="polite"></div>
+          </div>
+          <div class="filter-select-wrap">
+            <select id="mobile-blog-filter-select" class="filter-select">
+              <option value="all">すべての記事</option>
+              <optgroup label="モジュール別">
+                <option value="MM">📦 MM（在庫管理）</option>
+                <option value="SD">📈 SD（販売流通）</option>
+                <option value="PP">⚙️ PP（生産計画）</option>
+                <option value="FI">💰 FI（財務会計）</option>
+              </optgroup>
+              <optgroup label="カテゴリ別">
+                <option value="学習ガイド">📚 学習ガイド</option>
+                <option value="導入事例">🏢 導入事例</option>
+                <option value="技術解説">🔧 技術解説</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
         <!-- アクティブフィルター表示 -->
         <div id="active-filter-bar" class="active-filter-bar" style="display:none;">
           <span id="active-filter-label"></span>
