@@ -140,7 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================
   // ブログフィルター（ドロップダウン + URLハッシュ）
   // ========================================
-  function filterBlogPosts(value) {
+  function getSelectedValues(selId) {
+    const sel = document.getElementById(selId);
+    if (!sel) return [];
+    return Array.from(sel.selectedOptions).map(o => o.value).filter(v => v !== 'all');
+  }
+
+  function filterBlogPosts(selected) {
     const posts = document.querySelectorAll('.blog-post');
     const filterBar = document.getElementById('active-filter-bar');
     const filterLabel = document.getElementById('active-filter-label');
@@ -149,9 +155,10 @@ document.addEventListener('DOMContentLoaded', function() {
     posts.forEach(post => {
       const category = post.getAttribute('data-category') || '';
       const tags = (post.getAttribute('data-tags') || '').split(',').map(t => t.trim());
-      const matches = value === 'all'
-        || category === value
-        || tags.some(t => t.toLowerCase() === value.toLowerCase());
+      const matches = selected.length === 0
+        || selected.every(v =>
+            category === v || tags.some(t => t.toLowerCase() === v.toLowerCase())
+          );
 
       post.style.display = matches ? 'block' : 'none';
       if (matches) visibleCount++;
@@ -161,24 +168,19 @@ document.addEventListener('DOMContentLoaded', function() {
     if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
 
     if (filterBar) {
-      filterBar.style.display = value === 'all' ? 'none' : 'flex';
-      if (filterLabel) filterLabel.textContent = `「${value}」の記事を表示中`;
+      filterBar.style.display = selected.length === 0 ? 'none' : 'flex';
+      if (filterLabel) filterLabel.textContent = selected.map(v => `「${v}」`).join(' + ') + ' の記事を表示中';
     }
   }
 
-  function syncFilterSelects(value) {
+  function syncFilterSelects(selected) {
     ['blog-filter-select', 'mobile-blog-filter-select'].forEach(id => {
       const sel = document.getElementById(id);
-      if (sel) sel.value = value;
+      if (!sel) return;
+      Array.from(sel.options).forEach(o => {
+        o.selected = selected.includes(o.value);
+      });
     });
-  }
-
-  function applyHashFilter() {
-    const hash = decodeURIComponent(window.location.hash.replace('#', ''));
-    if (hash) {
-      syncFilterSelects(hash);
-      filterBlogPosts(hash);
-    }
   }
 
   // 両方のセレクトにイベントを登録
@@ -186,10 +188,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const sel = document.getElementById(id);
     if (!sel) return;
     sel.addEventListener('change', function () {
-      const value = this.value;
-      syncFilterSelects(value);
-      filterBlogPosts(value);
-      history.replaceState(null, '', value === 'all' ? location.pathname : '#' + value);
+      const selected = getSelectedValues(id);
+      syncFilterSelects(selected);
+      filterBlogPosts(selected);
     });
   });
 
@@ -197,14 +198,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const clearBtn = document.getElementById('clear-filter');
   if (clearBtn) {
     clearBtn.addEventListener('click', function () {
-      syncFilterSelects('all');
-      filterBlogPosts('all');
+      syncFilterSelects([]);
+      filterBlogPosts([]);
       history.replaceState(null, '', location.pathname);
     });
   }
-
-  // ページ読み込み時にハッシュを適用
-  if (window.location.hash) applyHashFilter();
-  window.addEventListener('hashchange', applyHashFilter);
 
 });

@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(python3:*)",
-      "Bash(find /Users/ryuto0203/Desktop/sap-blog-hugo -not -path */node_modules/* -not -path */.git/* -not -path */public/* -type d)"
+      "Bash(find /Users/ryuto0203/Desktop/sap-blog-hugo -not -path */node_modules/* -not -path */.git/* -not -path */public/* -type d)",
+      "Read(//Users/ryuto0203/.claude/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:develop--sapblog.netlify.app)",
+      "Bash(grep:*)"
     ]
   }
 }
