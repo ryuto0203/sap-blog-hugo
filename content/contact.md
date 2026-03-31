@@ -10,7 +10,7 @@ description: "SAP入門ナレッジへのお問い合わせはこちらから"
   </p>
 </div>
 
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/">
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/" netlify>
   <input type="hidden" name="form-name" value="contact" />
   <p style="display:none;">
     <label>Don't fill this out: <input name="bot-field" /></label>
