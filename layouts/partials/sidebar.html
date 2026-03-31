@@ -17,18 +17,7 @@
     <h3 class="sidebar-widget-title">絞り込む</h3>
     <div class="filter-select-wrap">
       <select id="blog-filter-select" class="filter-select">
-        <option value="all">すべての記事</option>
-        <optgroup label="モジュール別">
-          <option value="MM">📦 MM（在庫管理）</option>
-          <option value="SD">📈 SD（販売流通）</option>
-          <option value="PP">⚙️ PP（生産計画）</option>
-          <option value="FI">💰 FI（財務会計）</option>
-        </optgroup>
-        <optgroup label="カテゴリ別">
-          {{ range .Site.Taxonomies.categories }}
-          <option value="{{ .Page.Title }}">{{ .Page.Title }}</option>
-          {{ end }}
-        </optgroup>
+        {{ partial "filter-select-options.html" . }}
       </select>
     </div>
   </div>

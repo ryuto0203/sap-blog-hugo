@@ -23,18 +23,7 @@
           </div>
           <div class="filter-select-wrap">
             <select id="mobile-blog-filter-select" class="filter-select">
-              <option value="all">すべての記事</option>
-              <optgroup label="モジュール別">
-                <option value="MM">📦 MM（在庫管理）</option>
-                <option value="SD">📈 SD（販売流通）</option>
-                <option value="PP">⚙️ PP（生産計画）</option>
-                <option value="FI">💰 FI（財務会計）</option>
-              </optgroup>
-              <optgroup label="カテゴリ別">
-                {{ range .Site.Taxonomies.categories }}
-                <option value="{{ .Page.Title }}">{{ .Page.Title }}</option>
-                {{ end }}
-              </optgroup>
+              {{ partial "filter-select-options.html" . }}
             </select>
           </div>
         </div>
@@ -52,16 +41,6 @@
           <article class="post-list-item blog-post"
             data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}"
             data-tags="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}">
-            <div class="post-list-meta">
-              {{ with .Params.categories }}
-              <span class="category-badge category-badge-{{ index . 0 | urlize }}">{{ index . 0 }}</span>
-              {{ end }}
-              {{ with .Params.tags }}
-              <div class="post-list-tags">
-                {{ range . }}<span class="blog-tag">{{ . }}</span>{{ end }}
-              </div>
-              {{ end }}
-            </div>
             <h3 class="post-list-title">
               <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h3>
