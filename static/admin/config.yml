@@ -27,6 +27,7 @@ collections:
           - { label: "技術解説", value: "技術解説" }
           - { label: "学習ガイド", value: "学習ガイド" }
           - { label: "ニュース", value: "ニュース" }
+          - { label: "業務フロー", value: "業務フロー" }
       - label: "タグ"
         name: "tags"
         widget: "list"
