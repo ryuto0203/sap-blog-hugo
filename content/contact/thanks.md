@@ -1,6 +1,7 @@
 ---
 title: "送信完了"
 description: "お問い合わせありがとうございます"
+draft: true
 ---
 
 <div style="text-align: center; padding: 4rem 0;">
