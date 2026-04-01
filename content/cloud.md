@@ -42,6 +42,19 @@ SAP S/4HANA Cloudは、SAPの次世代クラウドERPです。インメモリデ
 | カスタマイズ | 制限あり | 自由度高い |
 | 導入期間 | 短い | 長い |
 
+## 導入ステップの流れ
+
+```mermaid
+flowchart LR
+  A["標準機能\n活用方針の決定"] --> B["データ品質\nクレンジング"] --> C["変更管理\n教育・組織対応"] --> D["段階的移行\nモジュール単位"]
+```
+
+<div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem; padding: 0.4rem 0.75rem; background: #f8f8f8; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem;">
+  <span>凡例</span>
+  <span><strong>→</strong> 推奨する実施順序</span>
+  <span><strong>[ ]</strong> 導入時の取り組み</span>
+</div>
+
 ## 導入のポイント
 
 1. **標準機能の活用**：カスタマイズを最小化し、SAPのベストプラクティスに合わせる
