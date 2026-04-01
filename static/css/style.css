@@ -1512,6 +1512,23 @@ article iframe {
   article table { font-size: 0.8rem; }
   article th, article td { padding: 0.5rem 0.75rem; }
 
+/* ========================================
+   Mermaid ダイアグラム
+   ======================================== */
+.mermaid-wrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.mermaid-wrapper pre.mermaid {
+  display: inline-block;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+
 
   /* フィルターバーのwrap */
   .active-filter-bar {

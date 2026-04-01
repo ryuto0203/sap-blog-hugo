@@ -21,5 +21,9 @@
   {{ partial "footer.html" . }}
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
   <script src="/js/site.js" defer></script>
+  {{ if .Store.Get "hasMermaid" }}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'neutral' });</script>
+  {{ end }}
 </body>
 </html>
