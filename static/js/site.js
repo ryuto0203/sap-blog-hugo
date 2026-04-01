@@ -147,12 +147,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ========================================
-  // ブログフィルター（ドロップダウン + URLハッシュ）
+  // ブログフィルター（チップUI）
   // ========================================
-  function getSelectedValues(selId) {
-    const sel = document.getElementById(selId);
-    if (!sel) return [];
-    return Array.from(sel.selectedOptions).map(o => o.value).filter(v => v !== 'all');
+  function getSelectedValues() {
+    const seen = new Set();
+    return Array.from(document.querySelectorAll('.filter-chip.active'))
+      .map(el => el.dataset.value)
+      .filter(v => { if (seen.has(v)) return false; seen.add(v); return true; });
   }
 
   function filterBlogPosts(selected) {
@@ -182,32 +183,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function syncFilterSelects(selected) {
-    ['blog-filter-select', 'mobile-blog-filter-select'].forEach(id => {
-      const sel = document.getElementById(id);
-      if (!sel) return;
-      Array.from(sel.options).forEach(o => {
-        o.selected = selected.includes(o.value);
-      });
+  function syncChips(selected) {
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.classList.toggle('active', selected.includes(chip.dataset.value));
     });
   }
 
-  // 両方のセレクトにイベントを登録
-  ['blog-filter-select', 'mobile-blog-filter-select'].forEach(id => {
-    const sel = document.getElementById(id);
-    if (!sel) return;
-    sel.addEventListener('change', function () {
-      const selected = getSelectedValues(id);
-      syncFilterSelects(selected);
-      filterBlogPosts(selected);
-    });
+  // チップクリック（サイドバー・モバイル共通）
+  document.addEventListener('click', function(e) {
+    if (!e.target.matches('.filter-chip')) return;
+    const value = e.target.dataset.value;
+    const isActive = e.target.classList.contains('active');
+    let selected = getSelectedValues();
+    if (isActive) {
+      selected = selected.filter(v => v !== value);
+    } else {
+      if (!selected.includes(value)) selected = [...selected, value];
+    }
+    syncChips(selected);
+    filterBlogPosts(selected);
   });
 
   // クリアボタン
   const clearBtn = document.getElementById('clear-filter');
   if (clearBtn) {
     clearBtn.addEventListener('click', function () {
-      syncFilterSelects([]);
+      syncChips([]);
       filterBlogPosts([]);
       history.replaceState(null, '', location.pathname);
     });

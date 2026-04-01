@@ -21,11 +21,7 @@
             </div>
             <div id="mobile-search-results" class="search-results" aria-live="polite"></div>
           </div>
-          <div class="filter-select-wrap" style="margin-top: 0.75rem;">
-            <select id="mobile-blog-filter-select" class="filter-select" multiple>
-              {{ partial "filter-select-options.html" . }}
-            </select>
-          </div>
+          {{ partial "filter-chips.html" . }}
         </div>
 
         <!-- アクティブフィルター表示（現在のタグで絞り込み中） -->
