@@ -9,7 +9,10 @@
       "Bash(git push:*)",
       "WebFetch(domain:develop--sapblog.netlify.app)",
       "Bash(grep:*)",
-      "Bash(hugo)"
+      "Bash(hugo)",
+      "Bash(system_profiler SPHardwareDataType)",
+      "Bash(hugo version:*)",
+      "Bash(hugo --quiet)"
     ]
   }
 }
