@@ -22,4 +22,19 @@
     </div>
   </div>
 
+  <!-- カテゴリ -->
+  <div class="sidebar-widget">
+    <h3 class="sidebar-widget-title">カテゴリ</h3>
+    <ul class="sidebar-category-list">
+      {{ range .Site.Taxonomies.categories }}
+      <li>
+        <a href="{{ .Page.RelPermalink }}" class="sidebar-category-link">
+          {{ .Page.Title }}
+          <span class="sidebar-category-count">{{ .Count }}</span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+
 </aside>
