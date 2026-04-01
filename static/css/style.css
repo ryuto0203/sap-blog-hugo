@@ -1611,3 +1611,40 @@ article iframe {
     padding: 0.15rem 0.5rem;
   }
 }
+
+/* ========================================
+   ページネーション
+   ======================================== */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.pagination-btn:hover {
+  background: var(--primary-dark, #1a56db);
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: var(--muted);
+  min-width: 4rem;
+  text-align: center;
+}
