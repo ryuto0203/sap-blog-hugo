@@ -77,6 +77,13 @@ flowchart LR
     SE16 -->|"操作性改善"| SE16N
     SE16N -->|"テーブル結合機能追加"| SE16H
 ```
+<div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem; padding: 0.4rem 0.75rem; background: #f8f8f8; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem;">
+  <span>凡例</span>
+  <span><strong>→</strong> 必須フロー</span>
+  <span><strong>[ ]</strong> 手動操作</span>
+  <span><strong>英数字コード</strong> = Tコード（SAPの操作コマンド）</span>
+  <span><strong>枠（subgraph）</strong> = 担当部門 or モジュール区分</span>
+</div>
 
 ---
 

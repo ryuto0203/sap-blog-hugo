@@ -34,6 +34,12 @@ flowchart LR
     M3b --> M4
     M4 --> M5
 ```
+<div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem; padding: 0.4rem 0.75rem; background: #f8f8f8; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem;">
+  <span>凡例</span>
+  <span><strong>→</strong> 必須フロー</span>
+  <span><strong>[ ]</strong> 手動操作</span>
+  <span><strong>英数字コード</strong> = Tコード（SAPの操作コマンド）</span>
+</div>
 
 ## SDモジュールが管理する業務の全体像
 
@@ -196,6 +202,12 @@ flowchart LR
     DL --> PK
     PK --> GI
 ```
+<div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem; padding: 0.4rem 0.75rem; background: #f8f8f8; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem;">
+  <span>凡例</span>
+  <span><strong>→</strong> 必須フロー</span>
+  <span><strong>[ ]</strong> 手動操作</span>
+  <span><strong>英数字コード</strong> = Tコード（SAPの操作コマンド）</span>
+</div>
 
 > **ポイント：出庫転記と在庫の連動**
 > 出庫転記を行うと、MMモジュールの在庫が減少します（移動タイプ601）。また、FIモジュールで売上原価の仕訳が自動的に起票されます。MMとFIをまたぐこの自動連携が、SAPの統合ERPとしての強みの一つです。
@@ -269,32 +281,39 @@ flowchart LR
 | 5 | 入金消込（売掛金の解消） | F-28 | 経理（FI） |
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph SALES["営業"]
         S1["引き合い受付\nVA11"]
         S2["見積作成\nVA21"]
-        S3["受注登録\nVA01\n（与信チェック・ATP確認）"]
-        S4["請求書発行\nVF01\n→FIに売上仕訳自動起票"]
+        S3["受注登録\nVA01"]
+        S4["請求書発行\nVF01"]
+        S1 --> S2 --> S3
     end
     subgraph WH["倉庫・物流"]
         W1["出荷伝票作成\nVL01N"]
-        W2["ピッキング実施\nVL02N"]
-        W3["出庫転記\nVL02N\n→在庫減算・売上原価自動起票"]
+        W2["ピッキング実施\nVL02N（ピッキング）"]
+        W3["出庫転記\nVL02N（出庫転記）"]
+        W1 --> W2 --> W3
     end
     subgraph FI["経理（FI）"]
         F1["入金確認\n銀行照合"]
         F2["売掛金消込\nF-28"]
         F3["売掛残高照会\nFBL5N"]
+        F1 --> F2
     end
 
-    S1 --> S2 --> S3
     S3 --> W1
-    W1 --> W2 --> W3
     W3 --> S4
     S4 --> F3
-    F1 --> F2
     F3 --> F2
 ```
+<div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem; padding: 0.4rem 0.75rem; background: #f8f8f8; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem;">
+  <span>凡例</span>
+  <span><strong>→</strong> 必須フロー</span>
+  <span><strong>[ ]</strong> 手動操作</span>
+  <span><strong>英数字コード</strong> = Tコード（SAPの操作コマンド）</span>
+  <span><strong>枠（subgraph）</strong> = 担当部門 or モジュール区分</span>
+</div>
 
 ---
 
