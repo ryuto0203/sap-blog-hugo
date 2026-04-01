@@ -12,7 +12,15 @@
       "Bash(hugo)",
       "Bash(system_profiler SPHardwareDataType)",
       "Bash(hugo version:*)",
-      "Bash(hugo --quiet)"
+      "Bash(hugo --quiet)",
+      "WebSearch",
+      "WebFetch(domain:tokulog.org)",
+      "WebFetch(domain:it-biz.online)",
+      "WebFetch(domain:sapcareerlab.com)",
+      "WebFetch(domain:www.sapsumikko.jp)",
+      "WebFetch(domain:dx-consultant.co.jp)",
+      "WebFetch(domain:erp.dentsusoken.com)",
+      "WebFetch(domain:infotechlife.net)"
     ]
   }
 }
