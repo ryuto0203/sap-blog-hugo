@@ -2,6 +2,15 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+  // テーブルをスクロール可能なラッパーで包む
+  document.querySelectorAll('article table').forEach(function(table) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'table-wrapper';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+
+
   // モバイルメニュートグル（ハンバーガー）
   const menuToggle = document.getElementById('menu-toggle');
   const navMenu = document.getElementById('nav-menu');

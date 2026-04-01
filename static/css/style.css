@@ -580,17 +580,19 @@ article ul, article ol {
 article ol { list-style: decimal; }
 article li { margin-bottom: 0.4rem; color: var(--foreground); }
 
-article table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.9rem;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--border);
-  display: block;
+.table-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+article table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
 }
 
 article th {
@@ -1306,10 +1308,8 @@ article iframe {
 /* テーブルのスクロール（article外も含む） */
 .content-wrapper table,
 .card table {
-  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  max-width: 100%;
+  width: 100%;
+  min-width: 100%;
 }
 
 /* ========================================
