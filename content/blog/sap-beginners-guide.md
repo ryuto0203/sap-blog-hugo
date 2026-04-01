@@ -2,7 +2,7 @@
 title: "SAP初心者が最初に学ぶべき5つのこと"
 date: 2026-01-10
 description: "SAPを学ぶ際に最初に理解すべき基本概念を5つに絞って解説します。ERP、モジュール、プロセス、トランザクション、レポートの基礎知識。"
-categories: ["学習ガイド"]
+categories: ["入門・学習"]
 tags: ["SAP入門", "初心者", "基礎知識", "MM", "SD", "PP", "FI"]
 draft: false
 author: "SAP入門ナレッジ 編集部"
