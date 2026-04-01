@@ -72,7 +72,6 @@
 ## 記事フォーマット標準
 
 ### Front matter
-- `author`: "SAP入門ナレッジ 編集部" で統一
 - `draft: false` で公開状態
 
 #### カテゴリ（categories）ルール — 必ず1つだけ付与する

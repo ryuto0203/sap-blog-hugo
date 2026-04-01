@@ -5,7 +5,6 @@ description: "SAP SDモジュール（販売管理）の業務フローを、ビ
 categories: ["業務フロー"]
 tags: ["SD", "販売管理", "出荷管理", "O2C", "VA01", "VL01N", "VF01", "業務フロー", "トランザクションコード"]
 draft: false
-author: "SAP入門ナレッジ 編集部"
 lastmod: 2026-04-01
 ---
 

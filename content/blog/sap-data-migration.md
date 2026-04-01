@@ -5,7 +5,6 @@ description: "レガシーシステムからSAPへのデータ移行で失敗し
 categories: ["技術・ツール"]
 tags: ["データ移行", "LSMW", "BAPI", "プロジェクト管理", "MM"]
 draft: false
-author: "SAP入門ナレッジ 編集部"
 lastmod: 2026-01-15
 ---
 
