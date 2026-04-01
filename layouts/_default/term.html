@@ -21,7 +21,14 @@
             </div>
             <div id="mobile-search-results" class="search-results" aria-live="polite"></div>
           </div>
-          {{ partial "filter-chips.html" . }}
+          <div class="inline-filter-toggle-wrap">
+            <button type="button" id="inline-filter-toggle" class="inline-filter-toggle-btn">
+              絞り込む <span class="filter-toggle-icon">▼</span><span id="inline-filter-count" class="filter-active-count" style="display:none;"></span>
+            </button>
+            <div id="inline-filter-panel" class="inline-filter-panel" style="display:none;">
+              {{ partial "filter-chips.html" . }}
+            </div>
+          </div>
         </div>
 
         <!-- アクティブフィルター表示（現在のタグで絞り込み中） -->
@@ -40,7 +47,6 @@
               <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h3>
             <div class="post-list-foot">
-              {{ with .Params.author }}<span class="post-list-author">{{ . }}</span>{{ end }}
               <span class="post-list-date">投稿: {{ .Date.Format "2006年1月2日" }}</span>
               {{ if .Params.lastmod }}
               <span class="post-list-date">更新: {{ .Lastmod.Format "2006年1月2日" }}</span>

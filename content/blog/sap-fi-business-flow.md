@@ -5,7 +5,6 @@ description: "SAP FIモジュール（財務会計）の業務フローを、ビ
 categories: ["業務フロー"]
 tags: ["FI", "財務会計", "総勘定元帳", "買掛金", "売掛金", "R2R", "FB50", "F110", "業務フロー", "トランザクションコード"]
 draft: false
-author: "SAP入門ナレッジ 編集部"
 lastmod: 2026-04-01
 ---
 

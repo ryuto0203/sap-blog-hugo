@@ -5,7 +5,6 @@ description: "SAPのテーブル検索トランザクションSE16・SE16N・SE1
 categories: ["技術・ツール"]
 tags: ["SE16", "SE16N", "SE16H", "テーブル検索", "データブラウザ", "テーブル結合", "ABAP", "開発Tips", "トランザクションコード"]
 draft: true
-author: "SAP入門ナレッジ 編集部"
 lastmod: 2026-04-01
 ---
 

@@ -5,7 +5,6 @@ description: "SAP MMモジュール（資材管理）の業務フローを、ビ
 categories: ["業務フロー"]
 tags: ["MM", "購買管理", "在庫管理", "P2P", "ME21N", "MIGO", "MIRO", "業務フロー", "トランザクションコード"]
 draft: false
-author: "SAP入門ナレッジ 編集部"
 lastmod: 2026-04-01
 ---
 

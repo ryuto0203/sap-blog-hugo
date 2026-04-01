@@ -187,6 +187,27 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.filter-chip').forEach(chip => {
       chip.classList.toggle('active', selected.includes(chip.dataset.value));
     });
+    const countBadge = document.getElementById('inline-filter-count');
+    if (countBadge) {
+      if (selected.length > 0) {
+        countBadge.textContent = selected.length;
+        countBadge.style.display = 'inline-flex';
+      } else {
+        countBadge.style.display = 'none';
+      }
+    }
+  }
+
+  // モバイル絞り込みパネルのトグル
+  const filterToggle = document.getElementById('inline-filter-toggle');
+  const filterPanel = document.getElementById('inline-filter-panel');
+  const filterToggleIcon = filterToggle ? filterToggle.querySelector('.filter-toggle-icon') : null;
+  if (filterToggle && filterPanel) {
+    filterToggle.addEventListener('click', function() {
+      const isOpen = filterPanel.style.display !== 'none';
+      filterPanel.style.display = isOpen ? 'none' : 'block';
+      if (filterToggleIcon) filterToggleIcon.textContent = isOpen ? '▼' : '▲';
+    });
   }
 
   // チップクリック（サイドバー・モバイル共通）

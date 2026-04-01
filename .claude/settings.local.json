@@ -20,7 +20,12 @@
       "WebFetch(domain:www.sapsumikko.jp)",
       "WebFetch(domain:dx-consultant.co.jp)",
       "WebFetch(domain:erp.dentsusoken.com)",
-      "WebFetch(domain:infotechlife.net)"
+      "WebFetch(domain:infotechlife.net)",
+      "Bash(hugo server:*)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i '' '/^author: /d' \"$f\")",
+      "Bash(done)"
     ]
   }
 }
