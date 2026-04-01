@@ -1592,11 +1592,11 @@ article iframe {
   /* フッターグリッドの調整 */
   .footer-content { padding: 0 1rem 2rem; }
 
-  /* ポストリストfootの縦並び */
+  /* ポストリストfootは横並び維持 */
   .post-list-foot {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.75rem;
   }
 
   /* ブログタグのサイズ縮小 */
